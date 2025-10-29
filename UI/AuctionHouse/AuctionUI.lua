@@ -872,7 +872,7 @@ end
 
 
 function OFRequestItemButton_OnClick(button)
-    print("Request item", button:GetParent().itemID, button:GetParent().item.equipSlot)
+    -- print("Request item", button:GetParent().itemID, button:GetParent().item.equipSlot)
     ns.AuctionWishlistConfirmPrompt:Show(
         button:GetParent().itemID,
         nil,
