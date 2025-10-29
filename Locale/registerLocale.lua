@@ -1,0 +1,3 @@
+local _, ns = ...
+local L = LibStub("AceLocale-3.0"):GetLocale("GuildfoundAH")
+ns.L = L
