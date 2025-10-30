@@ -3,21 +3,21 @@ Private fork of athene's OnlyFangs AH/GoAgain AH. All credits go to athene for h
 
 Status Cleanup:
 - working through coded ItemDB by category
-    o 10 % Weapons
-    o 10 % Cloth Gear
-    o 10 % Leather Gear
-    o 10 % Mail Gear
-    o 50 % Plate Gear
-    o 95 % Consumes
-    o 95 % TradeItems
-    o 100 % Quivers/Bags
-    o 100 % Projectiles
-    o 95 % Recipes
-    o 80 % Misc Items
+    - 10 % Weapons
+    - 10 % Cloth Gear
+    - 10 % Leather Gear
+    - 10 % Mail Gear
+    - 50 % Plate Gear
+    - 95 % Consumes
+    - 95 % TradeItems
+    - 100 % Quivers/Bags
+    - 100 % Projectiles
+    - 95 % Recipes
+    - 80 % Misc Items
 
 Status Translation:
 - english/spanish translations kept as is (except changed "OnlyFangs"/"GoAgain" wording to "Guildfound")
-    o maybe cleanup unused item translations later
+    - maybe cleanup unused item translations later
 - 100% addon texts translated for deDE clients
 - 90% of relevant Items translated (working on it as I clean up different item categories)
   
