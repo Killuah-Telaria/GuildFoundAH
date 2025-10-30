@@ -3,16 +3,16 @@ Private fork of athene's OnlyFangs AH/GoAgain AH. All credits go to athene for h
 
 Status Cleanup:
 - working through coded ItemDB by category
-    - 10 % Weapons
+    - 100 % Weapons
     - 10 % Cloth Gear
     - 10 % Leather Gear
-    - 10 % Mail Gear
-    - 50 % Plate Gear
-    - 95 % Consumes
-    - 95 % TradeItems
+    - 100 % Mail Gear
+    - 100 % Plate Gear
+    - 100 % Consumes
+    - 100 % TradeItems
     - 100 % Quivers/Bags
     - 100 % Projectiles
-    - 95 % Recipes
+    - 100 % Recipes
     - 80 % Misc Items
 
 Status Translation:
