@@ -32,5 +32,5 @@ Maybe:
 - Options for GuildLead/Officer
 - Open up "cross-guild" GuildFound (to allow sub-guilds with bank chars)
 - check if trading a subset of items should still be allowed (GuildFound-related)
-    o like conjured water, health stones, dungeon-items like uldaman staff
-    o would 100% mean rewriting logic on guildfound trading, likely making it 50x more complex
+    - like conjured water, health stones, dungeon-items like uldaman staff
+    - would 100% mean rewriting logic on guildfound trading, likely making it 50x more complex
