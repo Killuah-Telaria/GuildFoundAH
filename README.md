@@ -2,30 +2,16 @@ Private fork of athene's OnlyFangs AH/GoAgain AH. All credits go to athene for h
 
 
 Status Cleanup:
-- working through coded ItemDB by category
-    - 100 % Weapons
-    - 10 % Cloth Gear
-    - 10 % Leather Gear
-    - 100 % Mail Gear
-    - 100 % Plate Gear
-    - 100 % Consumes
-    - 100 % TradeItems
-    - 100 % Quivers/Bags
-    - 100 % Projectiles
-    - 100 % Recipes
-    - 80 % Misc Items
-
-Status Translation:
-- english/spanish translations kept as is (except changed "OnlyFangs"/"GoAgain" wording to "Guildfound")
-    - maybe cleanup unused item translations later
-- 100% addon texts translated for deDE clients
-- 90% of relevant Items translated (working on it as I clean up different item categories)
+- initial cleanup done (expect some false items still in DB)
+    - shown level is itemlevel, not character level
+    - further improvements will require full itemDB build from 0
   
 ToDo's:
-- remove Streamer-related options / instead open up more options for group content
+- remove other Streamer-related options
+- open up more options for group content
 - check other "sell" options
 - fix WoW default Money-Popup
-- error with magic link on open mailbox
+- sometimes error with magic link on open mailbox
 
 Maybe:
 - Include GuildFound Addon content
