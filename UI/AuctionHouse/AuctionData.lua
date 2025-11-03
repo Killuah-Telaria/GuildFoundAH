@@ -209,90 +209,23 @@ OFAuctionSort["list_rating"] = {
     { column = "rating",	reverse = true	},
 };
 
-OFAuctionSort["clips_streamer"] = {
-    { column = "when",		reverse = true	},
-    { column = "streamer",	reverse = false	},
-}
-
-OFAuctionSort["clips_race"] = {
-    { column = "when",	reverse = true  },
-    { column = "race",	reverse = false	},
-}
-
-OFAuctionSort["clips_level"] = {
-    { column = "when",	reverse = true  },
-    { column = "level",	reverse = false	},
-}
-
-OFAuctionSort["clips_class"] = {
-    { column = "when",	reverse = true  },
-    { column = "class",	reverse = false	},
-}
-
-OFAuctionSort["clips_when"] = {
-    { column = "streamer",	reverse = false	},
-    { column = "when",	reverse = true  },
-}
-
-OFAuctionSort["clips_where"] = {
-    { column = "when",	reverse = true  },
-    { column = "where",	reverse = false	},
-}
-
-OFAuctionSort["clips_clip"] = {
-    { column = "when",	reverse = true  },
-    { column = "clip",	reverse = false	},
-}
-
-OFAuctionSort["clips_rating"] = {
-    { column = "when",	reverse = true  },
-    { column = "rating",reverse = true	},
-}
-
-OFAuctionSort["clips_rate"] = {
-    { column = "when",	reverse = true  },
-    { column = "rate",	reverse = false	},
-}
-
-
 OFAuctionSort["lfg_name"] = {
-    { column = "viewers",		reverse = true	},
     { column = "name",	reverse = false	},
     { column = "meetsRequirements",	reverse = true	},
     { column = "isOnline",	reverse = true	},
 }
 
 OFAuctionSort["lfg_level"] = {
-    { column = "viewers",	reverse = true  },
     { column = "level",	reverse = false	},
     { column = "meetsRequirements",	reverse = true	},
     { column = "isOnline",	reverse = true	},
 }
 
 OFAuctionSort["lfg_colab"] = {
-    { column = "viewers",	reverse = true  },
     { column = "level",	reverse = false	},
     { column = "isDungeon",	reverse = true },
     { column = "meetsRequirements",	reverse = true	},
     { column = "isOnline",	reverse = true },
-}
-
-OFAuctionSort["lfg_viewers"] = {
-    { column = "meetsRequirements",	reverse = true	},
-    { column = "isOnline",	reverse = true },
-    { column = "viewers",	reverse = true  },
-}
-
-OFAuctionSort["lfg_livestream"] = {
-    { column = "meetsRequirements",	reverse = true	},
-    { column = "livestream",	reverse = false	},
-    { column = "isOnline",	reverse = true	},
-}
-
-OFAuctionSort["lfg_raid"] = {
-    { column = "meetsRequirements",	reverse = true	},
-    { column = "raid",	reverse = false	},
-    { column = "isOnline",	reverse = true	},
 }
 
 

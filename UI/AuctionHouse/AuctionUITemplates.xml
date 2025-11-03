@@ -1207,7 +1207,6 @@
 		</Frames>
 		<Scripts>
             <OnClick>
-
                 if ( IsModifiedClick() ) then
                     OFAuctionFrameItem_OnClickModified(self, "owner", self:GetParent():GetID() + GetEffectiveAuctionsScrollFrameOffset());
 				else

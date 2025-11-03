@@ -7,8 +7,8 @@
         <Frames>
 
             <!-- column headers -->
-            <Button name="OFLFGStreamerSort" inherits="OFAuctionSortButtonTemplate" text="L_STREAMER">
-                <Size x="188" y="19" />
+            <Button name="OFLFGPlayerSort" inherits="OFAuctionSortButtonTemplate" text="L_PLAYER">
+                <Size x="260" y="19" />
                 <Anchors>
                     <Anchor x="216" y="-51" point="TOPLEFT" />
                 </Anchors>
@@ -19,9 +19,9 @@
                 </Scripts>
             </Button>
             <Button name="OFLFGLvlSort" inherits="OFAuctionSortButtonTemplate" text="REQ_LEVEL_ABBR">
-                <Size x="28" y="19" />
+                <Size x="40" y="19" />
                 <Anchors>
-                    <Anchor x="0" point="LEFT" relativeTo="OFLFGStreamerSort" relativePoint="RIGHT" />
+                    <Anchor x="0" point="LEFT" relativeTo="OFLFGPlayerSort" relativePoint="RIGHT" />
                 </Anchors>
                 <Scripts>
                     <OnClick>
@@ -30,46 +30,13 @@
                 </Scripts>
             </Button>
             <Button name="OFLFGColabSort" inherits="OFAuctionSortButtonTemplate" text="L_COLAB">
-                <Size x="145" y="19" />
+                <Size x="285" y="19" />
                 <Anchors>
                     <Anchor x="0" point="LEFT" relativeTo="OFLFGLvlSort" relativePoint="RIGHT" />
                 </Anchors>
                 <Scripts>
                     <OnClick>
                         OFAuctionFrame_OnClickSortColumn("lfg", "colab")
-                    </OnClick>
-                </Scripts>
-            </Button>
-            <Button name="OFLFGAvgViewersSort" inherits="OFAuctionSortButtonTemplate" text="L_VIEWERS">
-                <Size x="56" y="19" />
-                <Anchors>
-                    <Anchor x="0" point="LEFT" relativeTo="OFLFGColabSort" relativePoint="RIGHT" />
-                </Anchors>
-                <Scripts>
-                    <OnClick>
-                        OFAuctionFrame_OnClickSortColumn("lfg", "viewers")
-                    </OnClick>
-                </Scripts>
-            </Button>
-            <Button name="OFLFGLivestreamSort" inherits="OFAuctionSortButtonTemplate" text="L_LIVESTREAM">
-                <Size x="84" y="19" />
-                <Anchors>
-                    <Anchor x="0" point="LEFT" relativeTo="OFLFGAvgViewersSort" relativePoint="RIGHT" />
-                </Anchors>
-                <Scripts>
-                    <OnClick>
-                        OFAuctionFrame_OnClickSortColumn("lfg", "livestream");
-                    </OnClick>
-                </Scripts>
-            </Button>
-            <Button name="OFLFGRaidSort" inherits="OFAuctionSortButtonTemplate" text="L_RAID_TWITCH">
-                <Size x="84" y="19" />
-                <Anchors>
-                    <Anchor x="0" point="LEFT" relativeTo="OFLFGLivestreamSort" relativePoint="RIGHT" />
-                </Anchors>
-                <Scripts>
-                    <OnClick>
-                        OFAuctionFrame_OnClickSortColumn("lfg", "raid");
                     </OnClick>
                 </Scripts>
             </Button>
@@ -155,7 +122,7 @@
 
             <!-- side panel buttons -->
 
-            <!-- Enable OnlyFangs Colab checkbox -->
+            <!-- Enable Join Search Button -->
             <CheckButton name="OFLFG_CheckButton" inherits="UICheckButtonTemplate">
                 <Size x="24" y="24" />
                 <Anchors>
@@ -164,7 +131,7 @@
                 <Scripts>
                     <OnLoad>
                         OFLFG_CheckButtonText:SetFontObject(GameFontNormal)
-                        OFLFG_CheckButtonText:SetText(L_ENABLE_COLAB)
+                        OFLFG_CheckButtonText:SetText(L_JOIN_SEARCH)
                     </OnLoad>
                 </Scripts>
             </CheckButton>
@@ -200,7 +167,7 @@
 
             <!-- Role Selection -->
             <Button name="OFLFG_DungeonTypeButton" inherits="UIPanelButtonTemplate" text="L_SELECT_DUNGEONS">
-                <Size x="130" y="22"/>
+                <Size x="150" y="22"/>
                 <Anchors>
                     <Anchor point="TOPLEFT" relativeTo="OFLFG_DungeonCheck" relativePoint="BOTTOMLEFT" x="10" y="-4"/>
                 </Anchors>
@@ -215,63 +182,7 @@
                 </Anchors>
             </Frame>
 
-            <!-- Viewer Requirements -->
-            <EditBox name="OFLFG_MinViewers" letters="6" numeric="true" autoFocus="false" inherits="InputBoxTemplate">
-                <Size x="50" y="18"/>
-                <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="OFLFG_RoleSelection" relativePoint="BOTTOMLEFT" x="0" y="-30" />
-                </Anchors>
-                <Layers>
-                    <Layer>
-                        <FontString name="OFLFG_MinViewersText" inherits="GameFontHighlightSmall" text="L_MIN_VIEWERS">
-                            <Anchors>
-                                <Anchor point="BOTTOMLEFT" relativeTo="OFLFG_MinViewers" relativePoint="TOPLEFT" x="-4" y="2"/>
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-                </Layers>
-            </EditBox>
-
-            <EditBox name="OFLFG_MaxViewers" letters="6" numeric="true" autoFocus="false" inherits="InputBoxTemplate">
-                <Size x="50" y="18"/>
-                <Anchors>
-                    <Anchor point="LEFT" relativeTo="OFLFG_MinViewers" relativePoint="RIGHT" x="44" y="0"/>
-                </Anchors>
-                <Layers>
-                    <Layer>
-                        <FontString name="OFLFG_MaxViewersText" inherits="GameFontHighlightSmall" text="L_MAX_VIEWERS">
-                            <Anchors>
-                                <Anchor point="BOTTOMLEFT" relativeTo="OFLFG_MaxViewers" relativePoint="TOPLEFT" x="-4" y="2"/>
-                            </Anchors>
-                        </FontString>
-                    </Layer>
-                </Layers>
-            </EditBox>
-
-            <!-- No Viewers Checkboxes -->
-            <CheckButton name="OFLFG_NoMinViewersCheck" inherits="UICheckButtonTemplate">
-                <Size x="24" y="24" />
-                <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="OFLFG_MinViewers" relativePoint="BOTTOMLEFT" x="-8" y="0" />
-                </Anchors>
-                <Scripts>
-                    <OnLoad>
-                        OFLFG_NoMinViewersCheckText:SetFontObject(GameFontHighlightSmall)
-                        OFLFG_NoMinViewersCheckText:SetText(L_NO_MIN)
-                    </OnLoad>
-                    <OnClick>
-                        local minViewers = _G["OFLFG_MinViewers"]
-                        local minViewersLabel = _G["OFLFG_MinViewersText"]
-                        minViewers:SetEnabled(not self:GetChecked())
-                        LFG_UpdateViewerColor(minViewersLabel, not self:GetChecked())
-                        if self:GetChecked() then
-                            minViewers:SetText("")
-                        end
-                    </OnClick>
-                </Scripts>
-            </CheckButton>
-
-            <Button name="OFLFG_ApplyButton" inherits="UIPanelButtonTemplate" text="L_APPLY_VIEWERS_FILTER">
+            <Button name="OFLFG_ApplyButton" inherits="UIPanelButtonTemplate" text="L_APPLY_FILTER">
                 <Size>
                     <AbsDimension x="191" y="20" />
                 </Size>
@@ -287,35 +198,13 @@
                 </Scripts>
             </Button>
 
-            <CheckButton name="OFLFG_NoMaxViewersCheck" inherits="UICheckButtonTemplate">
-                <Size x="24" y="24" />
-                <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="OFLFG_MaxViewers" relativePoint="BOTTOMLEFT" x="-8" y="0" />
-                </Anchors>
-                <Scripts>
-                    <OnLoad>
-                        OFLFG_NoMaxViewersCheckText:SetFontObject(GameFontHighlightSmall)
-                        OFLFG_NoMaxViewersCheckText:SetText(L_NO_MAX)
-                    </OnLoad>
-                    <OnClick>
-                        local maxViewers = _G["OFLFG_MaxViewers"]
-                        local maxViewersLabel = _G["OFLFG_MaxViewersText"]
-                        maxViewers:SetEnabled(not self:GetChecked())
-                        LFG_UpdateViewerColor(maxViewersLabel, not self:GetChecked())
-                        if self:GetChecked() then
-                            maxViewers:SetText("")
-                        end
-                    </OnClick>
-                </Scripts>
-            </CheckButton>
-
-            <!-- Block Users Button -->
+            <!-- Block Users Button 
             <Button name="OFLFG_BlockUsersButton" inherits="UIPanelButtonTemplate" text="L_BLOCK_USERS">
                 <Size x="120" y="18" />
                 <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="OFLFG_NoMinViewersCheck" relativePoint="BOTTOMLEFT" x="0" y="-5" />
+                    <Anchor point="TOPLEFT" relativeTo="OFLFG_RoleSelection" relativePoint="BOTTOMLEFT" x="0" y="-5" />
                 </Anchors>
-            </Button>
+            </Button>-->
 
             <!-- Bottom right buttons -->
             <Button name="OFLFGInviteButton" inherits="UIPanelButtonTemplate" text="INVITE">
@@ -350,7 +239,7 @@
                     <AbsDimension x="80" y="22" />
                 </Size>
                 <Anchors>
-                    <Anchor point="RIGHT" relativeTo="OFLFGInviteButton" relativePoint="LEFT" x="0"/>
+                    <Anchor point="RIGHT" relativeTo="OFLFGInviteButton" relativePoint="LEFT" x="0" y="-2" />
                 </Anchors>
                 <Layers>
                     <Layer level="BORDER">
@@ -371,7 +260,7 @@
 
         <Layers>
             <Layer level="BACKGROUND">
-                <FontString name="OFLFGTitle" inherits="GameFontNormal" text="L_STREAM_TOGETHER">
+                <FontString name="OFLFGTitle" inherits="GameFontNormal" text="L_DUNGEON_FINDER">
                     <Anchors>
                         <Anchor x="52"  y="-18" point="TOP" />
                     </Anchors>
@@ -404,19 +293,19 @@
 	<!-- OFLFGButtonTemplate is a single row in the 'LFG' tab -->
 	<Button name="OFLFGButtonTemplate" virtual="true">
 		<Size>
-			<AbsDimension x="576" y="37" />
+			<AbsDimension x="582" y="37" />
 		</Size>
 		<Layers>
 			<Layer level="BACKGROUND">
                 <Texture parentKey="disabledBg" hidden="true">
                     <Color r="1" g="1" b="1" a="0.07"/>
                     <Size>
-                        <AbsDimension x="540" y="32"/>
+                        <AbsDimension x="548" y="32"/>
                     </Size>
                     <Anchors>
                         <Anchor point="TOPLEFT">
 							<Offset>
-								<AbsDimension x="34" y="1" />
+								<AbsDimension x="34" y="0" />
 							</Offset>
                         </Anchor>
                     </Anchors>
@@ -483,7 +372,7 @@
                 </Texture>
 				<FontString parentKey="name" name="$parentName" inherits="GameFontNormalSmall" text="StreamerWithLongNameHere" justifyH="LEFT">
 					<Size>
-						<AbsDimension x="112" y="28" />
+						<AbsDimension x="182" y="28" />
 					</Size>
 					<Anchors>
 						<Anchor point="TOPLEFT">
@@ -498,7 +387,7 @@
 
                 <FontString parentKey="level" text="60" inherits="GameFontHighlightSmall" justifyH="LEFT">
                     <Size>
-                        <AbsDimension x="16" y="32" />
+                        <AbsDimension x="36" y="32" />
                     </Size>
                     <Anchors>
                         <Anchor point="LEFT" relativeKey="$parent.name" relativePoint="RIGHT" x="30" y="0" />
@@ -506,18 +395,10 @@
                 </FontString>
 				<FontString parentKey="colab" text="Ragefire Chasm" inherits="GameFontHighlightSmall" justifyH="LEFT">
 					<Size>
-						<AbsDimension x="135" y="32" />
+						<AbsDimension x="258" y="32" />
 					</Size>
                     <Anchors>
-                        <Anchor point="LEFT" relativeKey="$parent.level" relativePoint="RIGHT" x="4" y="0" />
-                    </Anchors>
-				</FontString>
-				<FontString parentKey="viewers" text="15 645" inherits="GameFontHighlightSmall" justifyH="RIGHT">
-					<Size>
-						<AbsDimension x="35" y="32" />
-					</Size>
-                    <Anchors>
-                        <Anchor point="LEFT" relativeKey="$parent.colab" relativePoint="RIGHT" x="24" y="0" />
+                        <Anchor point="LEFT" relativeKey="$parent.level" relativePoint="RIGHT" x="4" y="-2" />
                     </Anchors>
 				</FontString>
 			</Layer>
@@ -527,45 +408,6 @@
                 <Anchors>
                     <Anchor point="RIGHT" relativeKey="$parent.colab" relativePoint="RIGHT" x="45" y="0" />
                 </Anchors>
-			</Frame>
-
-			<Frame parentKey="livestreamContainer">
-				<Size>
-					<AbsDimension x="74" y="32" />
-				</Size>
-                <Anchors>
-                    <Anchor point="LEFT" relativeKey="$parent.viewers" relativePoint="RIGHT" x="12" y="0" />
-                </Anchors>
-				<Frames>
-					<EditBox parentKey="editBox" inherits="InputBoxTemplate" autoFocus="false">
-						<Size>
-							<AbsDimension x="74" y="20" />
-						</Size>
-						<Anchors>
-							<Anchor point="CENTER" />
-						</Anchors>
-						<FontString inherits="GameFontHighlightSmall" />
-					</EditBox>
-				</Frames>
-			</Frame>
-			<Frame parentKey="raidContainer">
-				<Size>
-					<AbsDimension x="74" y="32" />
-				</Size>
-                <Anchors>
-                    <Anchor point="LEFT" relativeKey="$parent.livestreamContainer" relativePoint="RIGHT" x="5" y="0" />
-                </Anchors>
-				<Frames>
-					<EditBox parentKey="editBox" inherits="InputBoxTemplate" autoFocus="false">
-						<Size>
-							<AbsDimension x="74" y="20" />
-						</Size>
-						<Anchors>
-							<Anchor point="CENTER" />
-						</Anchors>
-						<FontString inherits="GameFontHighlightSmall" />
-					</EditBox>
-				</Frames>
 			</Frame>
 
 			<Button parentKey="item">

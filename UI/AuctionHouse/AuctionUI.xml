@@ -92,7 +92,7 @@
                     </Anchor>
                 </Anchors>
             </Button>
-            <Button name="OFAuctionFrameTab5" inherits="OFAuctionTabTemplate" id="5" text="L_STREAM_TOGETHER">
+            <Button name="OFAuctionFrameTab5" inherits="OFAuctionTabTemplate" id="5" text="L_DUNGEON_FINDER">
                 <Anchors>
                     <Anchor point="TOPLEFT" relativeTo="OFAuctionFrameTab4" relativePoint="TOPRIGHT">
                         <Offset>
@@ -110,26 +110,6 @@
                     </Anchor>
                 </Anchors>
             </Button>
-			<!--
-	        <Button name="OFAuctionFrameTab7" inherits="OFAuctionTabTemplate" id="7" text="L_DEATH_CLIPS">
-                <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="OFAuctionFrameTab6" relativePoint="TOPRIGHT">
-                        <Offset>
-                            <AbsDimension x="-15" y="0" />
-                        </Offset>
-                    </Anchor>
-                </Anchors>
-            </Button>			
-            <Button name="OFAuctionFrameTab8" inherits="OFAuctionTabTemplate" id="8" text="">
-                <Anchors>
-                    <Anchor point="TOPLEFT" relativeTo="OFAuctionFrameTab7" relativePoint="TOPRIGHT">
-                        <Offset>
-                            <AbsDimension x="-15" y="0" />
-                        </Offset>
-                    </Anchor>
-                </Anchors>
-            </Button>
-			-->
 			<Frame name="OFAuctionFrameMoneyFrame" inherits="SmallMoneyFrameTemplate">
 				<Anchors>
 					<Anchor point="BOTTOMRIGHT" relativePoint="BOTTOMLEFT">
@@ -1373,7 +1353,7 @@
                     </Layer>
                 </Layers>
                 <Frames>
-                    <Button name="OFDeathClipsStreamerSort" inherits="OFAuctionSortButtonTemplate" text="L_STREAMER">
+                    <Button name="OFDeathClipsStreamerSort" inherits="OFAuctionSortButtonTemplate" text="L_PLAYER">
                         <Size>
                             <AbsDimension x="170" y="19" />
                         </Size>

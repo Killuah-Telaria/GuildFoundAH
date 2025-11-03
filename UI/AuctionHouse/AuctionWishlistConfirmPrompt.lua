@@ -131,7 +131,6 @@ local function CreateWishlistConfirmPrompt()
     local priceTypeDropdown = AceGUI:Create("Dropdown")
     priceTypeDropdown:SetList({
         ["Gold"] = L["Gold"],
-        ["TwitchRaid"] = L["Twitch Raid"],
         ["Other"] = L["Other"],
     })
     priceTypeDropdown:SetValue("Gold")
@@ -422,8 +421,6 @@ local function CreateWishlistConfirmPrompt()
 
             if isGold then
                 self.priceTypeDropdown:SetList({
-                    ["TwitchRaid"] = L["Twitch Raid"],
-                    ["Points"] = L["Points"],
                     ["Other"] = L["Other"],
                 })
                 self.priceTypeDropdown:SetValue("Other")
@@ -434,8 +431,6 @@ local function CreateWishlistConfirmPrompt()
             else
                 self.priceTypeDropdown:SetList({
                     ["Gold"] = L["Gold"],
-                    ["TwitchRaid"] = L["Twitch Raid"],
-                    ["Points"] = L["Points"],
                     ["Other"] = L["Other"],
                 })
                 self.priceTypeDropdown:SetValue("Gold")

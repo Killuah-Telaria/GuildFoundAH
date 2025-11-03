@@ -98,7 +98,7 @@ local function ShowTooltip(self, meetsRequirements, requirementsReason, entry, c
 
         if not meetsRequirements then
             GameTooltip:AddLine(L["REQUIREMENTS NOT MET"], 0.8, 0, 0)
-            GameTooltip:AddLine(L["This streamer has set certain level and/or viewer requirements"])
+            GameTooltip:AddLine(L["This player has set certain level requirements"])
             GameTooltip:AddLine(" ")
 
             if requirementsReason and #requirementsReason > 0 then
@@ -274,10 +274,6 @@ local function UpdateEntry(i, offset, button, entry)
         button.colab:SetTextColor(0.5, 0.5, 0.5, 1)
     end
 
-    -- Viewers
-    local viewerCount = ns.GetAvgViewers(entry.name)
-    button.viewers:SetText(FormatNumber(viewerCount))
-
     if button.roleContainer then
         local roles = entry.roles
         if not entry.isDungeon then
@@ -287,18 +283,6 @@ local function UpdateEntry(i, offset, button, entry)
     else
         ns.DebugLog("missing button.roleContainer")
     end
-
-    -- Livestream link
-    local livestream = entry.livestream
-    local raid = entry.raid
-
-
-    button.livestreamContainer.editBox:SetText(livestream)
-    button.livestreamContainer.editBox:SetCursorPosition(0)
-
-    -- Raid command
-    button.raidContainer.editBox:SetText(raid)
-    button.raidContainer.editBox:SetCursorPosition(0)
 
     -- Add OnClick handler for whisper button
     button.whisperButton:SetScript("OnClick", function()
@@ -341,25 +325,6 @@ local function UpdateEntry(i, offset, button, entry)
         end
     end
 
-    -- Add tooltip handlers for both input boxes
-    button.livestreamContainer.editBox:SetScript("OnEnter", function(self)
-        ShowTooltip(self, button.meetsRequirements, button.requirementsReason, button.entry, true)
-    end)
-    button.livestreamContainer.editBox:SetScript("OnLeave", function(self)
-		if GameTooltip:IsOwned(self) then
-			GameTooltip:Hide()
-		end
-    end)
-
-    button.raidContainer.editBox:SetScript("OnEnter", function(self)
-        ShowTooltip(self, button.meetsRequirements, button.requirementsReason, button.entry, true)
-    end)
-    button.raidContainer.editBox:SetScript("OnLeave", function(self)
-		if GameTooltip:IsOwned(self) then
-			GameTooltip:Hide()
-		end
-    end)
-
     -- Update selection state and button states
     if selectedRow == button then
         button:LockHighlight()
@@ -369,12 +334,9 @@ local function UpdateEntry(i, offset, button, entry)
 end
 
 local function updateSortArrows()
-    OFSortButton_UpdateArrow(OFLFGStreamerSort, "lfg", "name")
+    OFSortButton_UpdateArrow(OFLFGPlayerSort, "lfg", "name")
     OFSortButton_UpdateArrow(OFLFGLvlSort,      "lfg", "minLevel")
     OFSortButton_UpdateArrow(OFLFGColabSort,    "lfg", "colab")
-    OFSortButton_UpdateArrow(OFLFGAvgViewersSort, "lfg", "minViewers")
-    OFSortButton_UpdateArrow(OFLFGLivestreamSort, "lfg", "isOnline")
-    OFSortButton_UpdateArrow(OFLFGRaidSort,       "lfg", "isLeveling")
 end
 
 function LfgUI_Initialize()
@@ -393,12 +355,6 @@ end
 
 local function GetLFGEntries()
     local me = UnitName("player")
-    local myTwitchName = ns.GetTwitchName(me)
-
-    local livestream = ""
-    if myTwitchName then
-        livestream = string.format("twitch.tv/popout/%s/guest-star", myTwitchName)
-    end
 
     local all = {}
     if ns.AuctionHouseDB and ns.AuctionHouseDB.lfg then
@@ -418,16 +374,8 @@ local function GetLFGEntries()
                 currentLevel = ns.GetPlayerLevel()  -- override for cheats
             end
 
-            local raid = ""
-            if twitchName then
-                raid = "/raid " .. twitchName
-            end
-
             local entry = CopyTable(data)
             entry.displayName = displayName
-            entry.viewers = 13370
-            entry.livestream = livestream
-            entry.raid = raid
             entry.level = currentLevel
             entry.isOnline = isOnline
 
@@ -486,23 +434,9 @@ end
 function OFLFG_ApplyButton_OnClick()
     OFLFG_CheckButton:SetChecked(true)
     OFLFG_Apply()
-
-    -- Clear focus from input fields
-    local minViewers = _G["OFLFG_MinViewers"]
-    local maxViewers = _G["OFLFG_MaxViewers"]
-    minViewers:ClearFocus()
-    maxViewers:ClearFocus()
 end
 
 function OFLFG_Apply(overrideDungeons)
-    local minViewers = _G["OFLFG_MinViewers"]
-    local maxViewers = _G["OFLFG_MaxViewers"]
-    local noMin = _G["OFLFG_NoMinViewersCheck"]:GetChecked()
-    local noMax = _G["OFLFG_NoMaxViewersCheck"]:GetChecked()
-
-    local minViewerCount = noMin and 0 or tonumber(minViewers:GetText()) or 0
-    local maxViewerCount = noMax and 99999 or tonumber(maxViewers:GetText()) or 99999
-
     -- Check if collaboration is enabled
     local me = UnitName("player")
     local isEnabled = OFLFG_CheckButton:GetChecked()
@@ -530,8 +464,6 @@ function OFLFG_Apply(overrideDungeons)
     -- Otherwise create/update the entry
     local data = {
         name = me,
-        minViewers = minViewerCount,
-        maxViewers = maxViewerCount,
         isRP = OFLFG_RPTogetherCheck:GetChecked(),
         isDungeon = OFLFG_DungeonCheck:GetChecked(),
         dungeons = dungeons,
@@ -592,7 +524,7 @@ end
 
 function OFAuctionFrameLFG_OnLoad()
     OFAuctionFrame_SetSort("lfg", "colab", false)
-    OFLFG_BlockUsersButton:Disable()
+    --OFLFG_BlockUsersButton:Disable()
 
     -- Create the dungeon scroll list
     local root = OFAuctionFrameLFG
@@ -600,26 +532,6 @@ function OFAuctionFrameLFG_OnLoad()
 
     -- Initialize applyDirty state
     OFAuctionFrameLFG.applyDirty = false
-
-    -- Add handlers for viewer input boxes
-    local minViewers = _G["OFLFG_MinViewers"]
-    local maxViewers = _G["OFLFG_MaxViewers"]
-
-    minViewers:SetScript("OnTextChanged", function()
-        local value = tonumber(minViewers:GetText())
-        if value and value >= 0 then
-            OFAuctionFrameLFG.applyDirty = true
-            UpdateApplyButton()
-        end
-    end)
-
-    maxViewers:SetScript("OnTextChanged", function()
-        local value = tonumber(maxViewers:GetText())
-        if value and value >= 0 then
-            OFAuctionFrameLFG.applyDirty = true
-            UpdateApplyButton()
-        end
-    end)
 
     OFLFG_CheckButton:SetScript("OnClick", function ()
         OFLFG_Apply()
@@ -641,29 +553,6 @@ function OFAuctionFrameLFG_OnLoad()
 
         UpdateDungeonSection()
         OFLFG_Apply(overrideDungeons)
-    end)
-
-    OFLFG_NoMinViewersCheck:SetScript("OnClick", function(self)
-        OFLFG_CheckButton:SetChecked(true)
-
-        local minViewers = _G["OFLFG_MinViewers"]
-        local minViewersLabel = _G["OFLFG_MinViewersText"]
-        minViewers:SetEnabled(not self:GetChecked())
-        LFG_UpdateViewerColor(minViewersLabel, not self:GetChecked())
-
-        OFAuctionFrameLFG.applyDirty = true
-        UpdateApplyButton()
-    end)
-    OFLFG_NoMaxViewersCheck:SetScript("OnClick", function(self)
-        OFLFG_CheckButton:SetChecked(true)
-
-        local maxViewers = _G["OFLFG_MaxViewers"]
-        local maxViewersLabel = _G["OFLFG_MaxViewersText"]
-        maxViewers:SetEnabled(not self:GetChecked())
-        LFG_UpdateViewerColor(maxViewersLabel, not self:GetChecked())
-
-        OFAuctionFrameLFG.applyDirty = true
-        UpdateApplyButton()
     end)
 end
 
@@ -693,40 +582,8 @@ function OFAuctionFrameLFG_OnShow()
     -- Update role buttons based on dungeon checkbox
     ns.RoleButtonsToggleChecked(OFLFG_RoleSelection, currentEntry and currentEntry.roles)
 
-    -- Initialize viewer fields and checkboxes
-    local minViewers = _G["OFLFG_MinViewers"]
-    local maxViewers = _G["OFLFG_MaxViewers"]
-    local noMinCheck = _G["OFLFG_NoMinViewersCheck"]
-    local noMaxCheck = _G["OFLFG_NoMaxViewersCheck"]
-    local minViewersLabel = _G["OFLFG_MinViewersText"]
-    local maxViewersLabel = _G["OFLFG_MaxViewersText"]
-
-    if currentEntry then
-        local maxViewerCount = currentEntry.maxViewers
-        if currentEntry.maxViewers == 99999 then
-            maxViewerCount = ""
-        end
-
-        minViewers:SetText(currentEntry.minViewers or "1")
-        maxViewers:SetText(maxViewerCount or "")
-        noMinCheck:SetChecked(currentEntry.minViewers <= 0)
-        noMaxCheck:SetChecked(currentEntry.maxViewers == 99999)
-    else
-        -- Set defaults when no entry exists
-        minViewers:SetText("1")
-        maxViewers:SetText("")
-        noMinCheck:SetChecked(false)
-        noMaxCheck:SetChecked(true)
-    end
-
     -- cleanup previous state
     OFAuctionFrameLFG.applyDirty = false
-
-    -- Set initial state
-    minViewers:SetEnabled(not noMinCheck:GetChecked())
-    maxViewers:SetEnabled(not noMaxCheck:GetChecked())
-    LFG_UpdateViewerColor(minViewersLabel, not noMinCheck:GetChecked())
-    LFG_UpdateViewerColor(maxViewersLabel, not noMaxCheck:GetChecked())
 
     UpdateDungeonSection()
 
@@ -764,12 +621,9 @@ function OFLFG_Row_SetEnabled(button, enabled, reason, isOnline)
     button.name:SetTextColor(greyColor, greyColor, greyColor)
     button.level:SetTextColor(greyColor, greyColor, greyColor)
     button.colab:SetTextColor(greyColor, greyColor, greyColor)
-    button.viewers:SetTextColor(greyColor, greyColor, greyColor)
 
     -- Grey out the input field texts
     local lightGrey = enabled and 1 or 0.9
-    button.livestreamContainer.editBox:SetTextColor(lightGrey, lightGrey, lightGrey)
-    button.raidContainer.editBox:SetTextColor(lightGrey, lightGrey, lightGrey)
 
     -- Disable the editboxes and whisper button
     button.whisperButton:SetEnabled(isOnline)

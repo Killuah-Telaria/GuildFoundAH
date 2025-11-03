@@ -2097,8 +2097,6 @@ function OFSetupPriceTypeDropdown(self)
         if not isGoldSelected then
             rootDescription:CreateRadio(L["Gold"], IsPriceSelected, SetPriceSelected, ns.PRICE_TYPE_MONEY)
         end
-        rootDescription:CreateRadio(L["Twitch Raid"], IsPriceSelected, SetPriceSelected, ns.PRICE_TYPE_TWITCH_RAID)
-        rootDescription:CreateRadio(L["Points"], IsPriceSelected, SetPriceSelected, ns.PRICE_TYPE_GUILD_POINTS)
         rootDescription:CreateRadio(L["Custom"], IsPriceSelected, SetPriceSelected, ns.PRICE_TYPE_CUSTOM)
     end)
 end
@@ -2309,20 +2307,8 @@ function OFAuctionFrameAuctions_Update()
             button.auctionId = auction.id
         end
 
-        local isItem = index == 1
-        local isEnchantEntry = index == 2
-		-- Show or hide auction buttons
-        if isItem then
-            auction = nil
-
-            ns.TryExcept(
-                function() UpdateItemEntry(index, i, offset, button, ns.ITEM_GOLD, numBatchAuctions, totalAuctions + 2, "owner") end,
-                function(err)
-                    button:Hide()
-                    ns.DebugLog("OFAuctionFrameAuctions_Update UpdateItemEntry failed: ", err)
-                end
-            )
-        elseif isEnchantEntry then
+        local isEnchantEntry = index == 1
+        if isEnchantEntry then
             auction = nil
 
             ns.TryExcept(
